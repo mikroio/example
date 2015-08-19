@@ -1,6 +1,11 @@
-FROM python:2
-RUN pip install Flask
-ADD . /code
-WORKDIR /code
-CMD python app.py
-EXPOSE 5000
+FROM gliderlabs/alpine:3.1
+CMD ["/bin/app"]
+
+COPY . /go/src/github.com/mikroio/example
+RUN apk-install -t build-deps go git mercurial \
+	&& cd /go/src/github.com/mikroio/example \
+	&& export GOPATH=/go \
+	&& go get \
+	&& go build -o /bin/app \
+	&& rm -rf /go \
+	&& apk del --purge build-deps
