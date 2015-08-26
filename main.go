@@ -6,7 +6,7 @@ import (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-     io.WriteString(w, "Hello cruel world!")
+     io.WriteString(w, "Hello cruel cold world!")
 }
 
 func main() {
